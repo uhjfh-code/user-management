@@ -78,8 +78,9 @@ router.post("/", async (req, res) => {
   try {
     const validated = userSchema.parse(req.body);
 
+    const { id, lastLogin, ...data } = validated;
     const newUser = await prisma.user.create({
-      data: validated,
+      data,
     });
 
     res.status(201).json(newUser);
@@ -104,9 +105,10 @@ router.put("/:id", async (req, res) => {
     const updateSchema = userSchema.partial();
     const validated = updateSchema.parse(req.body);
 
+    const { id: _ignoreId, ...data } = validated;
     const updated = await prisma.user.update({
       where: { id: Number(id) },
-      data: validated,
+      data,
     });
 
     res.json(updated);
