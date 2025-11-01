@@ -68,16 +68,19 @@ export default function UsersList() {
 
     return (
         <div className="container">
-            <h1>User Management</h1>
             <div className="top-bar">
-                <input
+                <h1>User Management</h1>
+                <div className="search-wrapper">
+                    <input
                     className="search-bar"
                     placeholder="Search..."
                     value={search}
                     onChange={(e) => setSearch(e.target.value)} />
-                    <button className="search-btn" onClick={()=> fetchUsers}>
-                        <Search size={18}  strokeWidth ={2}/>
-                    </button>
+                    
+                <button className="search-btn" onClick={()=> fetchUsers}>
+                    <Search size={18}  strokeWidth ={2}/>
+                </button>
+                </div>    
             </div>
             <button className="add-btn" onClick={handleAddUser}>add new</button>
             {users.length === 0 ?(
@@ -100,6 +103,9 @@ export default function UsersList() {
                             <th onClick={() => handelSort("lastName")}>
                                 Last Name {getSortIcon("lastName")}
                             </th>
+                            <th onClick={() => handelSort("email")}>
+                                Email {getSortIcon("email")}
+                            </th>
                             <th onClick={() => handelSort("lastLogin")}>
                                 Last Login {getSortIcon("lastLogin")}
                             </th>
@@ -116,8 +122,8 @@ export default function UsersList() {
                                 <td>{u.email}</td>
                                 <td>{u.lastLogin ? new Date(u.lastLogin).toLocaleString() : "-"}</td>
                                 <td>
-                                    <button onClick={() => handleEdit(u.id)}>edit</button>
-                                    <button onClick={() => handleDelete(u.id)}>delete</button>
+                                    <button className="edit-btn" onClick={() => handleEdit(u.id)}>edit</button>
+                                    <button className="delete-btn"  onClick={() => handleDelete(u.id)}>delete</button>
                                 </td>
                             </tr>
                         ))}

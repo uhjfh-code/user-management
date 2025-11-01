@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { api } from "../api";
+import "../styles/UserForm.css";
 
 interface UserFormProps {
   mode: "add" | "edit";
@@ -260,10 +261,13 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+    <div className="user-form-container">
+      <h2>{isEdit ? "Edit User" : "Add User"}</h2>
+      <form className="user-form" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       {errorBanner && <div style={{ color: "red" }}>{errorBanner}</div>}
 
-      <Field
+      <div className="field-group">
+        <Field
         name="customerNumber"
         label="Customer Number"
         placeholder="5 digits"
@@ -274,8 +278,10 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required
         error={errors.customerNumber}
       />
+      </div>
 
-      <Field
+      <div className="field-group">
+        <Field
         name="username"
         label="Username"
         placeholder="3–30 alphanumeric"
@@ -286,8 +292,10 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required
         error={errors.username}
       />
-
-      <Field
+      </div>
+      <div className="field-row">
+        <div className="field-group">
+          <Field
         name="firstName"
         label="First Name"
         value={formData.firstName}
@@ -296,8 +304,9 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required
         error={errors.firstName}
       />
-
-      <Field
+        </div>
+        <div className="field-group">
+          <Field
         name="lastName"
         label="Last Name"
         value={formData.lastName}
@@ -306,8 +315,12 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required
         error={errors.lastName}
       />
+        </div>
 
-      <Field
+      </div>
+      
+      <div className="field-group">
+        <Field
         name="email"
         label="Email"
         type="email"
@@ -318,8 +331,10 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required
         error={errors.email}
       />
+      </div>
 
-      <Field
+      <div className="field-group">
+        <Field
         name="dateOfBirth"
         label="Date of Birth (DD.MM.YYYY)"
         type="date"
@@ -329,8 +344,12 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required
         error={errors.dateOfBirth}
       />
+      </div>
 
+      
+      
       {isEdit && (
+        <div className="field-group">
         <Field
           name="lastLogin"
           label="Last Login"
@@ -339,9 +358,12 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
           onBlur={handleBlur}
           readOnly
         />
+      </div>
       )}
 
-      <Field
+      <div className="row">
+        <div className="field-group">
+        <Field
         name="password"
         label="Password"
         type="password"
@@ -352,8 +374,10 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required={!isEdit}
         error={errors.password}
       />
+      </div>
 
-      <Field
+      <div className="field-group">
+        <Field
         name="repeatPassword"
         label="Repeat Password"
         type="password"
@@ -364,8 +388,13 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         required={!isEdit}
         error={errors.repeatPassword}
       />
+      </div>
+
+      </div>
 
       <button type="submit">{isEdit ? "Save Changes" : "Create User"}</button>
     </form>
+    </div>
+    
   );
 }

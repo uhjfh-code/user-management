@@ -1,0 +1,175 @@
+.container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
+  color: #333;
+}
+
+.container h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #222;
+}
+
+.top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+.search-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.search-btn:hover {
+  background-color: #f0f0f0;
+  color: #007bff;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.add-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.03);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+th,
+td {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+th:hover {
+  background-color: #f1f3f5;
+}
+
+tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* edit button */
+.edit-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  margin-right: 8px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.edit-btn:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
+
+/* delete button */
+.delete-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.delete-btn:hover {
+  color: #b02a37;
+  text-decoration: underline;
+}
+
+.container p {
+  margin-top: 20px;
+  color: #777;
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  table,
+  th,
+  td {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
+
+  .search-bar {
+    max-width: 250px;
+  }
+
+  .add-btn {
+    padding: 6px 12px;
+  }
+}

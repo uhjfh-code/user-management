@@ -11,8 +11,7 @@ export default function EditUser() {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "30px auto" }}>
-      <h2>Edit User</h2>
+    <div>
       {id ? (
         <UserForm mode="edit" userId={id} onSuccess={handleSuccess} />
       ) : (

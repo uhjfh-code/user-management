@@ -10,8 +10,7 @@ export default function AddUser() {
   };
 
   return (
-    <div style={{ maxWidth: "500px", margin: "30px auto" }}>
-      <h2>Add User</h2>
+    <div>
       <UserForm mode="add" onSuccess={handleSuccess} />
     </div>
   );
