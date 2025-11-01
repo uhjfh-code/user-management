@@ -4,6 +4,13 @@ import prisma from "../prisma";
 const router = Router();
 
 /**
+ * root router, only for test server
+ */
+router.get("/status", async(req, res)=>{
+  res.send("User Management API is running!");
+});
+
+/**
  * get all users(support order + search)
  * parameters:
  * -sortBy: (customerNumber, username, firstName, lastName, lastLogin)
@@ -39,19 +46,38 @@ router.get("/", async (req, res) => {
   }
 });
 
-
  /**
   * add new user
   */
 router.post("/", async(req, res)=>{
     try {
-        const user = await prisma.user.create({data: req.body});
+        const {
+          customerNumber,
+          username,
+          firstName,
+          lastName,
+          email,
+          dateOfBirth,
+          password
+        } = req.body;
+
+        const user = await prisma.user.create({
+          data: {
+            customerNumber: Number(customerNumber),
+            username,
+            firstName,
+            lastName,
+            email,
+            dateOfBirth: new Date(dateOfBirth),
+            password
+        },
+      });
         res.status(200).json(user);
     } catch (err) {
+      console.error("Prisma Error: ", err);
         res.status(400).json({error: "Failed to create user", details: err});
     }
 });
-
 
  /**
   * update user
@@ -70,7 +96,7 @@ router.put("/:id", async(req, res)=>{
 });
 
 /**
- *  delete user
+ * delete user
  */
 router.delete("/:id", async(req, res)=>{
     const {id} = req.params;
