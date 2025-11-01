@@ -46,6 +46,28 @@ router.get("/", async (req, res) => {
   }
 });
 
+/**
+  * get single use by id
+  */
+  router.get("/:id", async(req, res)=>{
+    const {id} = req.params;
+    try {
+      const user = await prisma.user.findUnique({
+        where: {id: Number(id)}
+      });
+
+      if(!user){
+        return res.status(404).json({error: "User not found"});
+      }
+
+      res.status(200).json(user);
+    } catch (err) {
+      console.error("Error fetching user:", err);
+      res.status(500).json({error: "Failed to fetch user"});
+    }
+ });
+
+
  /**
   * add new user
   */
@@ -85,15 +107,37 @@ router.post("/", async(req, res)=>{
 router.put("/:id", async(req, res)=>{
     const {id} = req.params;
     try {
+        const {
+          customerNumber,
+          username,
+          firstName,
+          lastName,
+          email,
+          dateOfBirth,
+          password,
+          lastLogin
+        } =req.body;
+
         const updated = await prisma.user.update({
             where:{id: Number(id)},
-            data: req.body,
+            data: {
+              customerNumber: Number(customerNumber),
+              username,
+              firstName,
+              lastName,
+              email,
+              dateOfBirth: new Date(dateOfBirth),
+              password,
+              lastLogin: lastLogin ? new Date(lastLogin) : undefined
+            },
         });
         res.json(updated);
-    } catch{
-        res.status(400).json({error: "User not found"});
+    } catch(err){
+      console.error("Update user error: ", err);
+      res.status(400).json({error: "User not found", details: err});
     }
 });
+
 
 /**
  * delete user
