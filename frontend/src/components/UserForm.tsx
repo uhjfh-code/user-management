@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { api } from "../api";
 import "../styles/UserForm.css";
+import {message} from "antd";
 
 interface UserFormProps {
   mode: "add" | "edit";
@@ -236,10 +237,10 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
 
       if (isEdit) {
         await api.put(`/users/${userId}`, dataToSend);
-        alert("User updated successfully!");
+        message.success("User updated successfully!");
       } else {
         await api.post("/users", dataToSend);
-        alert("User added successfully!");
+        message.success("User added successfully!");
       }
       onSuccess();
     } catch (err: any) {

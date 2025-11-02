@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { Search } from "lucide-react";
+import {message} from "antd";
 
 interface User {
     id: number;
@@ -56,8 +57,14 @@ export default function UsersList() {
 
     const handleDelete = async (id: number) => {
         if (window.confirm("Are you sure you want to delete this user?")) {
-            await api.delete(`/users/${id}`);
-            fetchUsers();
+            try {
+                await api.delete(`/users/${id}`);
+                message.success("User deleted successfully.");
+                fetchUsers();
+            } catch (error) {
+                console.error("Failed to delete user:", error);
+                alert("Failed to delete use. Please try again.");
+            }
         }
     };
 
