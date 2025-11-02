@@ -9,6 +9,7 @@ RUN npm ci --include=dev
 
 COPY . .
 
+ENV DATABASE_URL="postgresql://placeholder@localhost:5432/db?schema=public"
 RUN npx prisma generate
 RUN npx tsc -p tsconfig.json
 

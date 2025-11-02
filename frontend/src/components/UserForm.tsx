@@ -275,7 +275,6 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
         value={formData.customerNumber}
         onChange={handleChange}
         onBlur={handleBlur}
-        readOnly={isEdit}
         required
         error={errors.customerNumber}
       />
@@ -347,7 +346,6 @@ export default function UserForm({ mode, userId, onSuccess }: UserFormProps) {
       />
       </div>
 
-      
       
       {isEdit && (
         <div className="field-group">
